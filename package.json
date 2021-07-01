@@ -31,42 +31,49 @@
     "demo": "cross-env NODE_ENV=development webpack-serve webpack.config.js --open --open-path demo.html"
   },
   "peerDependencies": {
-    "react": ">=15.0.0",
-    "react-dom": ">=15.0.0"
+    "react": ">=17.0.2",
+    "react-dom": ">=17.0.2"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-polyfill": "^6.9.1",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
-    "chai": "^4.1.2",
-    "cross-env": "^5.0.0",
-    "eslint": "^4.6.1",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-node": "^5.1.1",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.14.5",
+    "@types/cytoscape": "^3.14.15",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.8",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
+    "babel-polyfill": "^6.26.0",
+    "chai": "^4.3.4",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.29.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-standard": "^4.1.0",
     "immutable": "^3.8.2",
-    "mocha": "^5.2.0",
-    "mocha-chrome": "^1.1.0",
-    "npm-run-all": "^4.1.1",
-    "prettier": "^1.13.7",
-    "react": "^16.4.1",
-    "react-docgen": "^2.21.0",
-    "react-dom": "^16.4.1",
-    "rimraf": "^2.6.2",
-    "webpack": "^4.15.1",
-    "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.9.0",
-    "webpack-serve": "^1.0.4"
+    "mocha": "^9.0.1",
+    "mocha-chrome": "^2.2.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.2",
+    "react": "^17.0.2",
+    "react-docgen": "^5.4.0",
+    "react-dom": "^17.0.2",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.3.5",
+    "webpack": "^5.41.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-serve": "^4.0.0"
   },
   "engines": {
     "node": ">=8.11.3"
   },
   "dependencies": {
-    "cytoscape": "^3.2.19",
-    "prop-types": "^15.6.2"
+    "cytoscape": "^3.19.0",
+    "prop-types": "^15.7.2"
   }
 }

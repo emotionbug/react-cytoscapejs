@@ -1,7 +1,5 @@
 import { shallowObjDiff } from './diff';
-import { get, toJson, forEach } from './json';
-
-export const identity = x => x;
+import { forEach, get, toJson } from './json';
 
 export const elements = [
   { data: { id: 'a', label: 'Example node A' } },

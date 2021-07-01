@@ -1,11 +1,17 @@
 {
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "env": {
     "browser": true,
     "es6": true,
     "node": true,
     "mocha": true
   },
-  "extends": "eslint:recommended",
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
@@ -13,7 +19,6 @@
       "jsx": true
     }
   },
-  "plugins": [],
   "rules": {
     "semi": "error"
   }

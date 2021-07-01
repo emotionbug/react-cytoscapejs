@@ -1,10 +1,11 @@
-import { get as atKey } from './json';
-import { shallowObjDiff } from './diff';
+import { ForEach, Get, get as atKey, ToJson } from './json';
+import { Diff, shallowObjDiff } from './diff';
+import cytoscape from 'cytoscape';
 
-const isDiffAtKey = (json1, json2, diff, key) =>
+const isDiffAtKey = (json1: any, json2: any, diff: Diff, key: string) =>
   diff(atKey(json1, key), atKey(json2, key));
 
-export const patch = (cy, json1, json2, diff, toJson, get, forEach) => {
+export const patch = (cy: cytoscape.Core, json1: any, json2: any, diff: Diff, toJson: ToJson, get: Get, forEach: ForEach<any>): void => {
   cy.batch(() => {
     // The shallow object diff() must defer to patchElements() as it must compare the
     // elements as an unordered set.  A custom diff(), with Immutable for example,
@@ -15,8 +16,8 @@ export const patch = (cy, json1, json2, diff, toJson, get, forEach) => {
     ) {
       patchElements(
         cy,
-        atKey(json1, 'elements'),
-        atKey(json2, 'elements'),
+        atKey(json1, 'elements') as cytoscape.ElementDefinition[],
+        atKey(json2, 'elements') as cytoscape.ElementDefinition[],
         toJson,
         get,
         forEach,
@@ -58,39 +59,42 @@ export const patch = (cy, json1, json2, diff, toJson, get, forEach) => {
     patchLayout(cy, atKey(json1, 'layout'), atKey(json2, 'layout'), toJson);
   }
 };
-
-const patchJson = (cy, key, val1, val2, toJson) => {
+const patchJson = (cy: cytoscape.Core, key: string, val1: any, val2: any, toJson: ToJson) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   cy[key](toJson(val2));
 };
 
-const patchLayout = (cy, layout1, layout2, toJson) => {
-  const layoutOpts = toJson(layout2);
+const patchLayout = (cy: cytoscape.Core, layout1: unknown, layout2: Record<string, any>, toJson: ToJson) => {
+  const layoutOpts = toJson(layout2) as cytoscape.LayoutOptions;
 
   if (layoutOpts != null) {
     cy.layout(layoutOpts).run();
   }
 };
 
-const patchStyle = (cy, style1, style2, toJson) => {
+const patchStyle = (cy: cytoscape.Core, style1: unknown, style2: Record<string, any>, toJson: ToJson) => {
   const style = cy.style();
 
   if (style == null) {
     return;
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   style.fromJson(toJson(style2)).update();
 };
 
-const patchElements = (cy, eles1, eles2, toJson, get, forEach, diff) => {
-  const toAdd = [];
+const patchElements = (cy: cytoscape.Core, eles1: cytoscape.ElementDefinition[], eles2: cytoscape.ElementDefinition[], toJson: ToJson, get: Get, forEach: ForEach<any>, diff: Diff) => {
+  const toAdd: cytoscape.ElementDefinition[] = [];
   const toRm = cy.collection();
-  const toPatch = [];
-  const eles1Map = {};
-  const eles2Map = {};
-  const eles1HasId = id => eles1Map[id] != null;
-  const eles2HasId = id => eles2Map[id] != null;
-  const getEle1 = id => eles1Map[id];
-  const getId = ele => get(get(ele, 'data'), 'id');
+  const toPatch: { ele1: cytoscape.ElementDefinition; ele2: cytoscape.ElementDefinition; }[] = [];
+  const eles1Map: { [k: string]: cytoscape.ElementDefinition } = {};
+  const eles2Map: { [k: string]: cytoscape.ElementDefinition } = {};
+  const eles1HasId = (id: string) => eles1Map[id] != null;
+  const eles2HasId = (id: string) => eles2Map[id] != null;
+  const getEle1 = (id: string) => eles1Map[id];
+  const getId = (ele: cytoscape.ElementDefinition) => get(get(ele, 'data'), 'id');
 
   forEach(eles2, ele2 => {
     const id = getId(ele2);
@@ -134,11 +138,11 @@ const patchElements = (cy, eles1, eles2, toJson, get, forEach, diff) => {
   );
 };
 
-const patchElement = (cy, ele1, ele2, toJson, get, diff) => {
+const patchElement = (cy: cytoscape.Core, ele1: cytoscape.ElementDefinition, ele2: cytoscape.ElementDefinition, toJson: ToJson, get: Get, diff: Diff) => {
   const id = get(get(ele2, 'data'), 'id');
   const cyEle = cy.getElementById(id);
-  const patch = {};
-  let jsonKeys = [
+  const patch: { [k: string]: unknown } = {};
+  const jsonKeys = [
     'data',
     'position',
     'selected',
@@ -162,6 +166,8 @@ const patchElement = (cy, ele1, ele2, toJson, get, diff) => {
   }
 
   if (Object.keys(patch).length > 0) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     cyEle.json(patch);
   }
 };

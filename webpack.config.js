@@ -7,15 +7,9 @@ const isProd = env.NODE_ENV === 'production';
 let conf = {
   mode: isProd ? 'production' : 'development',
 
-  serve: {
-    dev: {
-      index: 'demo.html'
-    }
-  },
-
   devtool: isProd ? false : 'inline-source-map',
 
-  entry: './src/index.js',
+  entry: './src/index.ts',
 
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -47,7 +41,7 @@ let conf = {
   },
 
   module: {
-    rules: [{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }]
+    rules: [{ test: /\.(tsx|ts|jsx|js)?$/, exclude: /node_modules/, loader: 'babel-loader' }]
   },
 
   plugins: [new webpack.EnvironmentPlugin(['NODE_ENV'])]
