@@ -1,10 +1,9 @@
 import React, { CSSProperties, RefObject } from 'react';
-import { defaults } from './defaults';
+import { defaults } from '../../utils/defaults';
 import cytoscape from 'cytoscape';
-import { patch } from './patch';
-import { Diff } from './diff';
-import { Get, ToJson } from './json';
-
+import { patch } from '../../utils/patch';
+import { Diff } from '../../utils/diff';
+import { Get, ToJson } from '../../utils/json';
 
 interface CytoscapeComponentProps {
   id?: string;
@@ -46,7 +45,6 @@ interface CytoscapeComponentProps {
  */
 export default class CytoscapeComponent extends React.Component<CytoscapeComponentProps> {
   private readonly containerRef: RefObject<HTMLDivElement>;
-  private displayName: string;
   private _cy: cytoscape.Core | null = null;
 
   static defaultProps = defaults;
@@ -71,7 +69,6 @@ export default class CytoscapeComponent extends React.Component<CytoscapeCompone
   constructor(props: CytoscapeComponentProps) {
     super(props);
     this.containerRef = React.createRef<HTMLDivElement>();
-    this.displayName = `CytoscapeComponent`;
   }
 
   componentDidMount(): void {
