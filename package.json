@@ -1,7 +1,7 @@
 {
   "name": "@emotionbug/react-cytoscapejs",
   "license": "MIT",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "private": false,
   "description": "React-based network visualization component, using Cytoscape",
   "author": "emotionbug <take-me-home@kakao.com>",
@@ -25,7 +25,8 @@
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "classnames": "^2.3.1"
+    "classnames": "^2.3.1",
+    "cytoscape": "^3.19.0"
   },
   "peerDependencies": {
     "react": "^17.0.2",
@@ -54,8 +55,8 @@
     "jest": "^27.0.6",
     "node-sass": "^6.0.1",
     "prettier": "^2.3.2",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
     "rollup": "^2.52.8",
     "rollup-plugin-copy": "^3.4.0",
@@ -68,7 +69,7 @@
     "ts-loader": "^9.2.3",
     "tslib": "^2.3.0",
     "typescript": "^4.3.5",
-    "webpack": "^5.43.0"
+    "webpack": "^5.44.0"
   },
   "engines": {
     "node": ">=12.0.0"
